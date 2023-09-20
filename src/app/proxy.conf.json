@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://narutodb.xyz",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": "/api/character"
+    },
+    "logLevel": "debug"
+  }
+}
