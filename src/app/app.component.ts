@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.fetchData(1, 15).subscribe((response: any) => {
+    this.dataService.fetchData().subscribe((response: any) => {
       this.data = response;
       console.log(this.data);
     });

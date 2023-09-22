@@ -6,11 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
-  private apiUrl = '/api';
+  private apiUrl = '/api/character';
   constructor(private http: HttpClient) {}
 
-  fetchData(page: number, limit: number): Observable<any> {
-    const url = `${this.apiUrl}?page=${page}&limit=${limit}`;
+  // fetchData(page: number, limit: number): Observable<any> {
+  //   const url = `${this.apiUrl}?page=${page}&limit=${limit}`;
+  //   return this.http.get(url);
+  // }
+
+  fetchData(): Observable<any> {
+    const url = `${this.apiUrl}`;
     return this.http.get(url);
   }
 }
