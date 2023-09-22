@@ -1,9 +1,13 @@
-<div class="container">
-  <!-- <div *ngFor="let item of galleryData"></div> -->
-
-  <!-- <div class="pagination">
-    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
-    <span>Page {{ currentPage }}</span>
-    <button (click)="nextPage()">Next</button>
-  </div> -->
+<div class="container mx-0 d-flex justify-content-center align-items-center">
+  <div class="row flex-container">
+    <div *ngIf="isLoading; else loadingFallback">
+      <app-card></app-card>
+    </div>
+    <ng-template #loadingFallback>
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="spinner-border" role="status"></div>
+        <p>Data is being fetched ...</p>
+      </div>
+    </ng-template>
+  </div>
 </div>
