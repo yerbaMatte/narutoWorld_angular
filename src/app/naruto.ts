@@ -23,3 +23,10 @@ export interface NarutoCharacter {
   };
   uniqueTraits: string[];
 }
+
+export interface NarutoCharacterPage {
+  characters: NarutoCharacter[];
+  currentPage: number;
+  pageSize: number;
+  totalCharacters: number;
+}

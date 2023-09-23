@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../naruto.service';
 import { NarutoCharacter } from '../naruto';
+import { NarutoCharacterPage } from '../naruto';
 
 @Component({
   selector: 'app-gallery',
@@ -15,9 +16,15 @@ export class GalleryComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.fetchData().subscribe((response: any) => {
-      this.data = response;
-      console.log(this.data);
-    });
+    this.dataService.fetchData().subscribe(
+      (response: NarutoCharacterPage) => {
+        this.narutoCharactersList = response.characters;
+        console.log(this.narutoCharactersList);
+        this.isLoading = true;
+      },
+      (error: any) => {
+        console.log('Failed to fetch data', error);
+      }
+    );
   }
 }
