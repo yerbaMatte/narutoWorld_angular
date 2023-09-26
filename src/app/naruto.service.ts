@@ -13,9 +13,8 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   fetchData(): Observable<NarutoCharacterPage> {
-    return this.http
-      .get<NarutoCharacterPage>(this.apiUrl)
-      .pipe(catchError(this.handleError<NarutoCharacterPage>));
+    return this.http.get<NarutoCharacterPage>(this.apiUrl);
+    // .pipe(catchError(this.handleError<NarutoCharacterPage>));
   }
 }
 
