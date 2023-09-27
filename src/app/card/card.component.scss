@@ -1,0 +1,25 @@
+.name {
+  font-size: 0.6rem;
+}
+
+.avatar-container {
+  width: 100%;
+  height: 10rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.avatar {
+  display: none;
+  overflow: hidden;
+}
+
+.button {
+  font-size: 0.5rem;
+  padding: 0.5rem;
+}
+
+.card-content {
+  padding: 0.5rem;
+}

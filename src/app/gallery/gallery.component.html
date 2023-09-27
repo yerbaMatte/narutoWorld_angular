@@ -1,12 +1,11 @@
-<div class="container mx-0 d-flex justify-content-center align-items-center">
-  <div class="row flex-container">
-    <div *ngIf="isLoading; else loadingFallback" class="row">
-      <div
-        *ngFor="let char of narutoCharactersList"
-        class="col-lg-2 col-md-3 col-sm-6"
-      >
-        <app-card [charDetails]="char"></app-card>
-      </div>
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="row flex-container justify-content-center">
+    <div *ngIf="isLoading; else loadingFallback" class="row gallery">
+      <ng-container *ngFor="let char of narutoCharactersList">
+        <div *ngIf="char.images.length > 0" class="col-lg-2 col-md-3 col-sm-4">
+          <app-card [charDetails]="char"></app-card>
+        </div>
+      </ng-container>
     </div>
     <ng-template #loadingFallback>
       <div class="d-flex flex-column justify-content-center align-items-center">

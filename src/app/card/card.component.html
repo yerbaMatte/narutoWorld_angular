@@ -1,7 +1,21 @@
 <div class="card">
-  <img
-    class="card-img-top"
-    src="{{ charDetails.images }}"
-    alt="Card image cap"
-  />
+  <div
+    class="avatar-container"
+    [ngStyle]="{
+      'background-image': 'url(' + charDetails.images + ')',
+      'border-radius': '6px'
+    }"
+  >
+    <!-- Empty div to set the background image -->
+    <img
+      src="{{ charDetails.images }}"
+      class="card-img-top avatar"
+      alt="{{ charDetails.name }} image"
+    />
+  </div>
+
+  <div class="card-body card-content">
+    <p class="card-title name">{{ charDetails.name }}</p>
+    <a href="#!" class="btn btn-danger button">Details</a>
+  </div>
 </div>
