@@ -8,16 +8,18 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
 }
 
 .avatar {
   display: none;
-  overflow: hidden;
 }
 
 .button {
   font-size: 0.5rem;
   padding: 0.5rem;
+  border-radius: 0 0 6px 6px !important;
 }
 
 .card-content {

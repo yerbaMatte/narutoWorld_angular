@@ -1,15 +1,18 @@
-<div class="container d-flex justify-content-center align-items-center">
-  <div class="row flex-container justify-content-center">
+<div
+  class="container d-flex flex-column h-100 justify-content-center align-items-center"
+>
+  <div class="d-flex">
     <div *ngIf="isLoading; else loadingFallback" class="row gallery">
       <ng-container *ngFor="let char of narutoCharactersList">
-        <div *ngIf="char.images.length > 0" class="col-lg-2 col-md-3 col-sm-4">
+        <div class="col-lg-2 col-md-3 col-sm-4">
           <app-card [charDetails]="char"></app-card>
         </div>
       </ng-container>
+      <app-pagination></app-pagination>
     </div>
     <ng-template #loadingFallback>
-      <div class="d-flex flex-column justify-content-center align-items-center">
-        <div class="spinner-border" role="status"></div>
+      <div class="d-flex flex-column align-items-center">
+        <div class="spinner-border color-white" role="status"></div>
         <p>Data is being fetched ...</p>
       </div>
     </ng-template>

@@ -1,0 +1,16 @@
+.pagination ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 5px 14px;
+  color: #222;
+}
+.p1 a.is-active {
+  background-color: red;
+  border-radius: 100%;
+  color: #fff;
+}
