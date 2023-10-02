@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PaginationService } from '../pagination.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { PaginationService } from '../pagination.service';
 })
 export class PaginationComponent {
   currentPage!: number;
+  @Input() pagesAmount!: number;
 
   constructor(private paginationService: PaginationService) {
     this.currentPage = this.paginationService.getCurrentPage();
@@ -16,6 +17,5 @@ export class PaginationComponent {
   onPageClick(pageNumber: number): void {
     this.paginationService.setCurrentPage(pageNumber);
     this.currentPage = pageNumber;
-    console.log(this.currentPage);
   }
 }

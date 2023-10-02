@@ -11,9 +11,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./gallery.component.sass'],
 })
 export class GalleryComponent implements OnInit, OnDestroy {
-  narutoCharactersList: NarutoCharacter[] = [];
-  data: NarutoCharacter[] = [];
+  allNarutoCharactersList: NarutoCharacter[] = [];
+  currentCharactersList: NarutoCharacter[] = [];
   currentPageSubscription!: Subscription;
+  numberOfPages: number = 0;
   isLoading = false;
   currentPage = 0;
 
@@ -23,21 +24,39 @@ export class GalleryComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.fetchAllCharacters();
+    //
     this.currentPageSubscription = this.paginationService
       .getCurrentPageObservable()
       .subscribe((currentPage) => {
         this.currentPage = currentPage;
-        this.fetchPageData();
+        this.updateCurrentCharactersList();
       });
   }
 
-  fetchPageData() {
+  fetchAllCharacters() {
     this.dataService
-      .fetchPageData(this.currentPage, 12)
+      .fetchData(1, 1430)
       .subscribe((response: NarutoCharacterPage) => {
-        this.narutoCharactersList = response.characters;
+        this.dataService.setAllCharacters(response.characters);
+        this.allNarutoCharactersList = this.dataService.getAllCharacters();
+        this.updateCurrentCharactersList();
+        this.numberOfPages = Math.ceil(
+          this.allNarutoCharactersList.length / 12
+        );
         this.isLoading = true;
       });
+  }
+
+  updateCurrentCharactersList() {
+    const charactersPerPage = 12;
+    const startIndex = (this.currentPage - 1) * charactersPerPage;
+    const endIndex = startIndex + charactersPerPage;
+    const list = this.allNarutoCharactersList.slice(startIndex, endIndex);
+
+    this.dataService.setCurrentNarutoCharactersList(list);
+    this.currentCharactersList =
+      this.dataService.getCurrentNarutoCharactersList();
   }
 
   ngOnDestroy(): void {

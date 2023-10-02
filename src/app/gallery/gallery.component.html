@@ -3,12 +3,12 @@
 >
   <div class="d-flex">
     <div *ngIf="isLoading; else loadingFallback" class="row gallery">
-      <ng-container *ngFor="let char of narutoCharactersList">
+      <ng-container *ngFor="let char of currentCharactersList">
         <div class="col-lg-2 col-md-3 col-sm-4">
           <app-card [charDetails]="char"></app-card>
         </div>
       </ng-container>
-      <app-pagination></app-pagination>
+      <app-pagination [pagesAmount]="numberOfPages"></app-pagination>
     </div>
     <ng-template #loadingFallback>
       <div class="d-flex flex-column align-items-center">
