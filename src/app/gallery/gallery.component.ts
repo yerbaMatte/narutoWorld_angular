@@ -1,19 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../naruto.service';
 import { NarutoCharacter } from '../naruto';
 import { NarutoCharacterPage } from '../naruto';
 import { PaginationService } from '../pagination.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.sass'],
 })
-export class GalleryComponent implements OnInit, OnDestroy {
+export class GalleryComponent implements OnInit {
   allNarutoCharactersList: NarutoCharacter[] = [];
   currentCharactersList: NarutoCharacter[] = [];
-  currentPageSubscription!: Subscription;
   numberOfPages: number = 0;
   isLoading = false;
   currentPage = 0;
@@ -25,8 +23,10 @@ export class GalleryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.fetchAllCharacters();
-    //
-    this.currentPageSubscription = this.paginationService
+    this.dataService
+      .getCurrentNarutoCharactersList()
+      .subscribe((characters) => (this.currentCharactersList = characters));
+    this.paginationService
       .getCurrentPageObservable()
       .subscribe((currentPage) => {
         this.currentPage = currentPage;
@@ -39,7 +39,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
       .fetchData(1, 1430)
       .subscribe((response: NarutoCharacterPage) => {
         this.dataService.setAllCharacters(response.characters);
-        this.allNarutoCharactersList = this.dataService.getAllCharacters();
+        this.allNarutoCharactersList = response.characters;
         this.updateCurrentCharactersList();
         this.numberOfPages = Math.ceil(
           this.allNarutoCharactersList.length / 12
@@ -53,13 +53,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
     const startIndex = (this.currentPage - 1) * charactersPerPage;
     const endIndex = startIndex + charactersPerPage;
     const list = this.allNarutoCharactersList.slice(startIndex, endIndex);
-
     this.dataService.setCurrentNarutoCharactersList(list);
-    this.currentCharactersList =
-      this.dataService.getCurrentNarutoCharactersList();
-  }
-
-  ngOnDestroy(): void {
-    this.currentPageSubscription.unsubscribe();
   }
 }

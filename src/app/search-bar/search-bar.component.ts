@@ -13,16 +13,13 @@ export class SearchBarComponent {
 
   search() {
     if (this.searchQuery.trim() !== '') {
-      // Call the DataService to search for characters
       const filteredCharacters = this.dataService.searchCharacters(
         this.searchQuery
       );
-      // Do something with the filtered characters (e.g., display in the UI)
+
       console.log('Filtered characters:', filteredCharacters);
       this.dataService.setCurrentNarutoCharactersList(filteredCharacters);
-      console.log(this.dataService.getCurrentNarutoCharactersList());
     } else {
-      // Handle an empty search query if needed
     }
   }
 }
