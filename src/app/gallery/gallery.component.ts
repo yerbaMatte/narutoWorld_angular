@@ -40,6 +40,7 @@ export class GalleryComponent implements OnInit {
       .subscribe((response: NarutoCharacterPage) => {
         this.dataService.setAllCharacters(response.characters);
         this.allNarutoCharactersList = response.characters;
+        console.log(this.allNarutoCharactersList);
         this.updateCurrentCharactersList();
         this.numberOfPages = Math.ceil(
           this.allNarutoCharactersList.length / 12
