@@ -6,12 +6,13 @@
       *ngIf="isLoading; else loadingFallback"
       class="row flex-grow-1 align-content-between"
     >
-      <ng-container *ngFor="let char of currentCharactersList">
-        <div class="col-lg-2 col-md-3 col-sm-4">
-          <app-card [charDetails]="char"></app-card>
-        </div>
+      <ng-container *ngIf="characters$ | async as characters">
+        <ng-container *ngFor="let char of characters">
+          <div class="col-lg-2 col-md-3 col-sm-4">
+            <app-card [charDetails]="char"></app-card>
+          </div>
+        </ng-container>
       </ng-container>
-      <app-pagination [pagesAmount]="numberOfPages"></app-pagination>
     </div>
     <ng-template #loadingFallback>
       <div class="d-flex flex-column align-items-center align-self-center">
